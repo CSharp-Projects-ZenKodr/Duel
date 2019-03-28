@@ -1,25 +1,70 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; 
 
 public class MenuController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject Rules;
+    public GameObject MainMenu;
+    public GameObject confirmQuit; //Quit confirmation scroll
+    public GameObject Options;
+
+    private void Start()
     {
-        
+        MainMenu.SetActive(true);   
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (MainMenu.activeSelf)
+        {
+            Rules.SetActive(false);
+            confirmQuit.SetActive(false);
+            Options.SetActive(false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        { //Exit dialogue on back button press.
+            if (MainMenu.activeSelf)
+            {
+                youSureBro();
+            }
+            else
+            {
+                MainMenu.SetActive(true);
+            }
+        }
     }
 
+    //Guide
+    public void roll()
+    {//Toggle the 'Guide' scroll
+        MainMenu.SetActive(!MainMenu.activeSelf);
+        Rules.SetActive(!Rules.activeSelf);
+    }
+
+    //Options menu
+    public void optionsMenu()
+    {
+        MainMenu.SetActive(!MainMenu.activeSelf);
+        Options.SetActive(!Options.activeSelf);
+    }
+
+    //Quit game: 
+    public void youSureBro()
+    { //You sure you wanna quit, bro? Confirmation dialogue
+        MainMenu.SetActive(false);
+        confirmQuit.SetActive(true);
+    }
     public void quitTheGame()
     {
-        
         Application.Quit();
-        Debug.Log("quitGamePressed");
     }
+    public void cancelQuit()
+    {
+        confirmQuit.SetActive(false);
+        MainMenu.SetActive(true);
+    }
+
 }   
