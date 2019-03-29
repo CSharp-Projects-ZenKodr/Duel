@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
@@ -35,6 +36,12 @@ public class MenuController : MonoBehaviour
                 MainMenu.SetActive(true);
             }
         }
+    }
+
+    //Play
+    public void play()
+    {
+        SceneManager.LoadScene(2);
     }
 
     //Guide
