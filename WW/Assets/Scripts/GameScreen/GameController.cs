@@ -45,6 +45,7 @@ public class GameController : MonoBehaviour
             Instantiate(flippedTile_prefab).transform.position = enemy_tile_pos[i].transform.position;
 
         }
+        
     }
 
     // Update is called once per frame
