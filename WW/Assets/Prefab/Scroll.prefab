@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5590983490174611186}
   - component: {fileID: 4641458956531077922}
+  - component: {fileID: 5809856346791673141}
   m_Layer: 0
   m_Name: Scroll
   m_TagString: Untagged
@@ -87,6 +88,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5809856346791673141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692638369125715023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16023a940e5ed9e4ca8a690f1e185e97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activePlayerSprite: {fileID: 0}
+  enemyPlayerSprite: {fileID: 0}
 --- !u!1001 &1258625373614774509
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -173,6 +188,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.2575487
+      objectReference: {fileID: 0}
+    - target: {fileID: 3722949637976715517, guid: 60f70a3cecba87f4680ad3c229436cb5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60f70a3cecba87f4680ad3c229436cb5, type: 3}
@@ -268,6 +288,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.2575487
+      objectReference: {fileID: 0}
+    - target: {fileID: 6133913232007444645, guid: a2491d3e15a3dac419a15bb2f4a18fa2,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2491d3e15a3dac419a15bb2f4a18fa2, type: 3}
@@ -463,6 +488,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.2575487
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451531444188992993, guid: 2287006a6baf0284081a4b743641e017,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2287006a6baf0284081a4b743641e017, type: 3}
@@ -758,6 +788,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.2575487
+      objectReference: {fileID: 0}
+    - target: {fileID: 3506929421019043076, guid: cc48d1c0f86a6eb49b6279927b1f9566,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc48d1c0f86a6eb49b6279927b1f9566, type: 3}

@@ -94,8 +94,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selected: 0
+  player: 0
   SpriteSelected: {fileID: 21300000, guid: f515832e22eae6a43bc0a3677645e15d, type: 3}
   SpriteUnselected: {fileID: 21300000, guid: 63d3c865abbf78d49bc21b08da1b9bc3, type: 3}
+  SpriteHiddden: {fileID: 21300000, guid: 997e2d964baa6c5419d54c35ae909ae8, type: 3}
+  TileName: 
 --- !u!61 &554805997142482465
 BoxCollider2D:
   m_ObjectHideFlags: 0
