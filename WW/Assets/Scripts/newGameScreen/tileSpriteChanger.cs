@@ -10,8 +10,9 @@ public class tileSpriteChanger : MonoBehaviour
 
     private SpriteRenderer renderer; //Look at Start function
     private bool isHidden;
-    public bool IsSelected { get; set; } 
+    public bool IsSelected { get; set; }
 
+    public static string selectedTile;
 
     // Start is called before the first frame update
     void Start()
@@ -19,12 +20,16 @@ public class tileSpriteChanger : MonoBehaviour
         IsSelected = isHidden = false;
         renderer = GetComponent<SpriteRenderer>();
         renderer.sprite = tileNormal;
-        
+        selectedTile = "None";
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (IsSelected && selectedTile != name)
+        {
+            OnMouseDown();
+        }
 
     }
 
@@ -35,6 +40,7 @@ public class tileSpriteChanger : MonoBehaviour
             if (!IsSelected)
             {
                 IsSelected = true;
+                selectedTile = name;
                 transform.GetChild(0).gameObject.SetActive(true);
                 Select();
             }

@@ -45,6 +45,7 @@ public class GameState : MonoBehaviour
             turnComplete = false;
         }
 
+
     }
 
     public void turnOver()
@@ -71,6 +72,7 @@ public class GameState : MonoBehaviour
             if (playerNumber == 1)
             {
                 P1HandTiles.Add(Instantiate(TilePrefabs[temp]));
+                P1HandTiles[i].name = i.ToString(); //sets the index as their name. To be used in deselecting all other tiles.
                 P1HandTiles[i].transform.position = TilePositions.transform.GetChild(i).transform.position;
                 P1HandTiles[i].SetActive(false);
                 
@@ -78,6 +80,7 @@ public class GameState : MonoBehaviour
             else if (playerNumber == 2)
             {
                 P2HandTiles.Add(Instantiate(TilePrefabs[temp]));
+                P2HandTiles[i].name = i.ToString(); //sets the index as their name. To be used in deselecting all other tiles.
                 P2HandTiles[i].transform.position = TilePositions.transform.GetChild(i).transform.position;
                 P2HandTiles[i].SetActive(false);
             }
