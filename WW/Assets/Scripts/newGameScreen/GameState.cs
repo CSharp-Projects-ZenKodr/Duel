@@ -48,6 +48,29 @@ public class GameState : MonoBehaviour
 
     }
 
+    public void addTile()
+    {
+        Debug.Log("addTile called");
+        int temp = Random.Range(0, 9999) % 4;
+        if (turnOfPlayer == 1)
+        {
+            if (P1HandTiles.Count < 4)
+            {
+                P1HandTiles.Add(Instantiate(TilePrefabs[temp]));
+                P1HandTiles[P1HandTiles.Count - 1].name = TilePrefabs[temp].name + (P1HandTiles.Count - 1).ToString();
+                P1HandTiles[P1HandTiles.Count - 1].transform.position = TilePositions.transform.GetChild(P1HandTiles.Count - 1).transform.position;
+                P1HandTiles[P1HandTiles.Count - 1].SetActive(true);
+            }
+        }
+        else if (turnOfPlayer == 2)
+        {
+            P2HandTiles.Add(Instantiate(TilePrefabs[temp]));
+            P2HandTiles[P2HandTiles.Count - 1].name = TilePrefabs[temp].name + (P2HandTiles.Count - 1).ToString();
+            P2HandTiles[P2HandTiles.Count - 1].transform.position = TilePositions.transform.GetChild(P2HandTiles.Count - 1).transform.position;
+            P2HandTiles[P2HandTiles.Count - 1].SetActive(true);
+        }
+    }
+
     public void turnOver()
     {//Function called by a temporary turn complete button
         if (turnOfPlayer == 1)
@@ -72,7 +95,7 @@ public class GameState : MonoBehaviour
             if (playerNumber == 1)
             {
                 P1HandTiles.Add(Instantiate(TilePrefabs[temp]));
-                P1HandTiles[i].name = i.ToString(); //sets the index as their name. To be used in deselecting all other tiles.
+                P1HandTiles[i].name = TilePrefabs[temp].name + i.ToString(); //sets the index as their name. To be used in deselecting all other tiles.
                 P1HandTiles[i].transform.position = TilePositions.transform.GetChild(i).transform.position;
                 P1HandTiles[i].SetActive(false);
                 
@@ -80,7 +103,7 @@ public class GameState : MonoBehaviour
             else if (playerNumber == 2)
             {
                 P2HandTiles.Add(Instantiate(TilePrefabs[temp]));
-                P2HandTiles[i].name = i.ToString(); //sets the index as their name. To be used in deselecting all other tiles.
+                P2HandTiles[i].name = TilePrefabs[temp].name + i.ToString(); //sets the index as their name. To be used in deselecting all other tiles.
                 P2HandTiles[i].transform.position = TilePositions.transform.GetChild(i).transform.position;
                 P2HandTiles[i].SetActive(false);
             }

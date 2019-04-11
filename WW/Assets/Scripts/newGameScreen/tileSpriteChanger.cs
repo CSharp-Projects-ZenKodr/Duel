@@ -35,7 +35,7 @@ public class tileSpriteChanger : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!isHidden)
+        if (!isHidden && ScrollClick.selectedScroll == "none")
         {
             if (!IsSelected)
             {

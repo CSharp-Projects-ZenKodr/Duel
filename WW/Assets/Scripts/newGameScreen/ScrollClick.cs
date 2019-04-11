@@ -11,7 +11,7 @@ public class ScrollClick : MonoBehaviour
     private Vector3 EnlargedScale;
 
 
-    private static string selectedScroll; //name of the scroll that is currently selected. representing which scroll of the 3 is selected.
+    public static string selectedScroll; //name of the scroll that is currently selected. representing which scroll of the 3 is selected.
 
 
 
@@ -22,16 +22,23 @@ public class ScrollClick : MonoBehaviour
         defaultScale = new Vector3(0.18280F, 0.18280F);
         EnlargedScale = new Vector3(0.4F, 0.4F);
         defaultPosition = gameObject.transform.position;
+
+        transform.localScale = defaultScale;
         Selected = false;
+        selectedScroll = "none";
+        
         scrollRenderer = GetComponent<SpriteRenderer>();
-        selectedScroll = "None";
+        
     }
 
     private void Update()
     {
         if (Selected && selectedScroll != name)
         {
-            OnMouseDown();
+            transform.position = defaultPosition;
+            transform.localScale = defaultScale;
+            scrollRenderer.sortingOrder = 0;
+            Selected = !Selected;
         }
     }
 
@@ -49,6 +56,7 @@ public class ScrollClick : MonoBehaviour
             transform.position = defaultPosition;
             transform.localScale = defaultScale;
             scrollRenderer.sortingOrder = 0;
+            selectedScroll = "none";
         }
         Selected = !Selected;
     }
