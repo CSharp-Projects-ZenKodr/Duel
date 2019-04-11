@@ -96,6 +96,8 @@ MonoBehaviour:
   tileNormal: {fileID: 21300000, guid: 35ea8571340d1d74da141590cc6a2689, type: 3}
   tileSelected: {fileID: 21300000, guid: 1578eb212a9b34f47a33e31bfdd42d4d, type: 3}
   tileHideSymbol: {fileID: 21300000, guid: 31263c149e563e0478dc4e07fb1c26b5, type: 3}
+  Information: {fileID: 9035720743257221957, guid: ce95a8d1a748b4bf4828aa5d43456500,
+    type: 3}
 --- !u!61 &2245006983201413753
 BoxCollider2D:
   m_ObjectHideFlags: 0
