@@ -10,6 +10,11 @@ public class MenuController : MonoBehaviour
     public GameObject MainMenu;
     public GameObject confirmQuit; //Quit confirmation scroll
     public GameObject Options;
+    public GameObject RulesPart2;
+    public GameObject RulesPart2Sub1;
+    public GameObject RulesPart2Sub2;
+    public GameObject RulesPart2Sub3;
+    public GameObject RulesPart2Sub4;
 
     private void Start()
     {
@@ -23,6 +28,11 @@ public class MenuController : MonoBehaviour
             Rules.SetActive(false);
             confirmQuit.SetActive(false);
             Options.SetActive(false);
+            RulesPart2.SetActive(false);
+            RulesPart2Sub1.SetActive(false);
+            RulesPart2Sub2.SetActive(false);
+            RulesPart2Sub3.SetActive(false);
+            RulesPart2Sub4.SetActive(false);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -46,10 +56,64 @@ public class MenuController : MonoBehaviour
 
     //Guide
     public void roll()
-    {//Toggle the 'Guide' scroll
+    {  //Toggle the 'Guide' scroll
         MainMenu.SetActive(!MainMenu.activeSelf);
         Rules.SetActive(!Rules.activeSelf);
     }
+
+    public void rolldown()
+    {
+        //It will take you scroll screen 2
+        Rules.SetActive(!Rules.activeSelf);
+        RulesPart2.SetActive(!RulesPart2.activeSelf);
+    }
+
+    public void fireOptionClicked()
+    {
+        RulesPart2.SetActive(!RulesPart2.activeSelf);
+        RulesPart2Sub1.SetActive(!RulesPart2Sub1.activeSelf);
+    }
+
+    public void boltOptionClicked()
+    {
+        RulesPart2.SetActive(!RulesPart2.activeSelf);
+        RulesPart2Sub2.SetActive(!RulesPart2Sub2.activeSelf);
+    }
+
+    public void waterOptionClicked()
+    {
+        RulesPart2.SetActive(!RulesPart2.activeSelf);
+        RulesPart2Sub3.SetActive(!RulesPart2Sub3.activeSelf);
+    }
+
+    public void earthOptionClicked()
+    {
+        RulesPart2.SetActive(!RulesPart2.activeSelf);
+        RulesPart2Sub4.SetActive(!RulesPart2Sub4.activeSelf);
+    }
+
+    public void backToSub()
+    {
+        if ( RulesPart2Sub1.active == true )
+        {
+            RulesPart2Sub1.SetActive(false);
+        }
+        else if ( RulesPart2Sub2.active == true)
+        {
+            RulesPart2Sub2.SetActive(false);
+        }
+        else if ( RulesPart2Sub3.active == true)
+        {
+            RulesPart2Sub3.SetActive(false);
+        }
+        else if ( RulesPart2Sub4.active == true)
+        {
+            RulesPart2Sub4.SetActive(false);
+        }
+        RulesPart2.SetActive(!RulesPart2.activeSelf);
+
+    }
+
 
     //Options menu
     public void optionsMenu()
