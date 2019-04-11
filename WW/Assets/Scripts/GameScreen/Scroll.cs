@@ -6,7 +6,7 @@ public class Scroll : MonoBehaviour
 {
     //THIS IS FOR THE CREATING SPELLS BEHAVIOR  
 
-    List<GameObject> TilesAdded; //List of all the tiles present in (active/placed on) the scroll. //For Later 
+    private List<GameObject> TilesAdded; //List of all the tiles present in (active/placed on) the scroll. //For Later 
     
     // Start is called before the first frame update
     void Start()
@@ -23,28 +23,28 @@ public class Scroll : MonoBehaviour
     {//Activates the preset symbols on the scroll so they are visible.
         switch (spellName.ToLower())
         {
-            case "ackh":
-                this.transform.GetChild(0).gameObject.SetActive(true);
-                break;
-            case "di":
+            //case "ackh":
+            //    this.transform.GetChild(0).gameObject.SetActive(true);
+            //    break;
+            case "fire":
                 this.transform.GetChild(1).gameObject.SetActive(true);
                 break;
-            case "dir":
-                this.transform.GetChild(2).gameObject.SetActive(true);
-                break;
-            case "floo":
+            //case "dir":
+            //    this.transform.GetChild(2).gameObject.SetActive(true);
+            //    break;
+            case "rock":
                 this.transform.GetChild(3).gameObject.SetActive(true);
                 break;
-            case "ri":
-                this.transform.GetChild(4).gameObject.SetActive(true);
-                break;
-            case "rid":
-                this.transform.GetChild(5).gameObject.SetActive(true);
-                break;
-            case "spa":
+            //case "ri":
+            //    this.transform.GetChild(4).gameObject.SetActive(true);
+            //    break;
+            //case "rid":
+            //    this.transform.GetChild(5).gameObject.SetActive(true);
+            //    break;
+            case "thunder":
                 this.transform.GetChild(6).gameObject.SetActive(true);
                 break;
-            case "waqu":
+            case "water":
                 this.transform.GetChild(7).gameObject.SetActive(true);
                 break;
             default:
