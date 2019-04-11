@@ -7,6 +7,7 @@ public class tileSpriteChanger : MonoBehaviour
     public Sprite tileNormal;
     public Sprite tileSelected;
     public Sprite tileHideSymbol;
+    public GameObject Information;
 
     private SpriteRenderer renderer; //Look at Start function
     private bool isHidden;
@@ -19,12 +20,13 @@ public class tileSpriteChanger : MonoBehaviour
         IsSelected = isHidden = false;
         renderer = GetComponent<SpriteRenderer>();
         renderer.sprite = tileNormal;
+        Information.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-    
+
     }
 
     private void OnMouseDown()
@@ -34,15 +36,22 @@ public class tileSpriteChanger : MonoBehaviour
             if (!IsSelected)
             {
                 IsSelected = true;
+                Information.SetActive(!Information.activeSelf);
                 Select();
             }
             else
             {
                 IsSelected = false;
+                Information.SetActive(!Information.activeSelf);
                 DeSelect();
             }
         }
     }
+
+    /*public void TileClicked()
+    {
+        Information.SetActive(!Information.activeSelf);
+    }*/
 
     public void HideFace()
     {
