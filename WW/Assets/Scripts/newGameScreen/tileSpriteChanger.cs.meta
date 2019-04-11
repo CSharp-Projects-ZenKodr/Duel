@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ca6f8d676c740d1459805abf55445086
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - tileNormal: {instanceID: 0}
+  - tileSelected: {instanceID: 0}
+  - tileHideSymbol: {fileID: 21300000, guid: 31263c149e563e0478dc4e07fb1c26b5, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

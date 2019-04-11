@@ -3,8 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour
+public class OBGameController : MonoBehaviour
 {
+
+    /*
+     DONT USE THIS CLASS
+     DONT USE THIS CLASS
+     DONT USE THIS CLASS
+     DONT USE THIS CLASS
+     DONT USE THIS CLASS
+     DONT USE THIS CLASS 
+     DONT USE THIS CLASS
+     DONT USE THIS CLASS 
+     DONT USE THIS CLASS
+     DONT USE THIS CLASS 
+     DONT USE THIS CLASS
+     DONT USE THIS CLASS
+     DONT USE THIS CLASS
+     DONT USE THIS CLASS
+     DONT USE THIS CLASS
+     DONT USE THIS CLASS
+      */
+
+
+
+
+
+
+
     //PositionHolder lists: All of these lists contain only positions.
     public List<GameObject> barrier_pos;
     public List<GameObject> tiles_pos;

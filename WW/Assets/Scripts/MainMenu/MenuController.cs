@@ -94,19 +94,19 @@ public class MenuController : MonoBehaviour
 
     public void backToSub()
     {
-        if ( RulesPart2Sub1.active == true )
+        if ( RulesPart2Sub1.activeSelf == true )
         {
             RulesPart2Sub1.SetActive(false);
         }
-        else if ( RulesPart2Sub2.active == true)
+        else if ( RulesPart2Sub2.activeSelf == true)
         {
             RulesPart2Sub2.SetActive(false);
         }
-        else if ( RulesPart2Sub3.active == true)
+        else if ( RulesPart2Sub3.activeSelf == true)
         {
             RulesPart2Sub3.SetActive(false);
         }
-        else if ( RulesPart2Sub4.active == true)
+        else if ( RulesPart2Sub4.activeSelf == true)
         {
             RulesPart2Sub4.SetActive(false);
         }
