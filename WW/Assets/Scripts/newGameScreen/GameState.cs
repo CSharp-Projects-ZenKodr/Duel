@@ -44,6 +44,7 @@ public class GameState : MonoBehaviour
             ShowTiles(turnOfPlayer);
             turnComplete = false;
         }
+
     }
 
     public void turnOver()
