@@ -41,18 +41,21 @@ public class ScrollClick : MonoBehaviour
 
     void OnMouseDown()
     {
-        Selected = !Selected;
-        if (Selected)
+        if (!Controller.paused)
         {
-            transform.localScale = EnlargedScale;
-            scrollRenderer.sortingOrder = 2;
-            selectedScroll = name;
-        }
-        else
-        {
-            transform.localScale = defaultScale;
-            scrollRenderer.sortingOrder = 0;
-            selectedScroll = "none";
+            Selected = !Selected;
+            if (Selected)
+            {
+                transform.localScale = EnlargedScale;
+                scrollRenderer.sortingOrder = 2;
+                selectedScroll = name;
+            }
+            else
+            {
+                transform.localScale = defaultScale;
+                scrollRenderer.sortingOrder = 0;
+                selectedScroll = "none";
+            }
         }
         
     }
