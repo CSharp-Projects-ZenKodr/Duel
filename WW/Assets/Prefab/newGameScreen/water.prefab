@@ -97,9 +97,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileNormal: {fileID: 21300000, guid: 22af9c2563b3b594b9b2ec0e87d6a53f, type: 3}
   tileSelected: {fileID: 21300000, guid: 8bc4967d4eaa44d418f24315b00f2dc5, type: 3}
-  tileHideSymbol: {fileID: 21300000, guid: 31263c149e563e0478dc4e07fb1c26b5, type: 3}
-  Information: {fileID: 9035720743257221957, guid: ce95a8d1a748b4bf4828aa5d43456500,
-    type: 3}
 --- !u!61 &8870972714371385392
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -239,6 +236,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9060570199977321709, guid: ce95a8d1a748b4bf4828aa5d43456500,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 2965979094899903361, guid: ce95a8d1a748b4bf4828aa5d43456500,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 73
+      objectReference: {fileID: 0}
+    - target: {fileID: 2965979094899903361, guid: ce95a8d1a748b4bf4828aa5d43456500,
+        type: 3}
+      propertyPath: m_Text
+      value: "Water Trident:\nCombines with Zeus Bolt, Earth Power, \nand Water Trident"
       objectReference: {fileID: 0}
     - target: {fileID: 9035720744256747244, guid: ce95a8d1a748b4bf4828aa5d43456500,
         type: 3}

@@ -1116,11 +1116,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9add20ff52c6349bb864d6ca90c2ed8d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7486904ce5116ca47a744852caa0495a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1162,7 +1162,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.401
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1177,7 +1177,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.036111113
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1210,7 +1210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 292013375}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 542.80817, y: 643.04895, z: -2.5746627}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6476,6 +6476,7 @@ MonoBehaviour:
   RulesPart2Sub2: {fileID: 1692184116}
   RulesPart2Sub3: {fileID: 55363832}
   RulesPart2Sub4: {fileID: 1040281695}
+  AmbientMusic: {fileID: 292013376}
 --- !u!1 &1254457217
 GameObject:
   m_ObjectHideFlags: 0

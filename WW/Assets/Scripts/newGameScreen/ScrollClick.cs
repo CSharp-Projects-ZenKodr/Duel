@@ -4,60 +4,56 @@ using UnityEngine;
 
 public class ScrollClick : MonoBehaviour
 {
-    public GameObject enlargedPosition;
-    private Vector3 defaultPosition;
-    private SpriteRenderer scrollRenderer;
+    //Attributes
+    public bool Selected;
     private Vector3 defaultScale;
     private Vector3 EnlargedScale;
-
-
-    public static string selectedScroll; //name of the scroll that is currently selected. representing which scroll of the 3 is selected.
-
-
-
-    public bool Selected; //represents if the scroll has been selected and is enlarged
-
+    public static string selectedScroll; //name of the scroll (out of all the scrolls) that is selected.
+    private SpriteRenderer scrollRenderer;
+    
+    //Functions
     void Start()
     {
-        defaultScale = new Vector3(0.18280F, 0.18280F);
-        EnlargedScale = new Vector3(0.4F, 0.4F);
-        defaultPosition = gameObject.transform.position;
-
-        transform.localScale = defaultScale;
         Selected = false;
         selectedScroll = "none";
-        
+        transform.localScale = defaultScale;
+        EnlargedScale = new Vector3(0.4F, 0.4F);
+        defaultScale = new Vector3(0.18280F, 0.18280F);
         scrollRenderer = GetComponent<SpriteRenderer>();
-        
     }
 
-    private void Update()
+    void Update()
     {
-        if (Selected && selectedScroll != name)
+        if (selectedScroll != name)
         {
-            transform.position = defaultPosition;
             transform.localScale = defaultScale;
             scrollRenderer.sortingOrder = 0;
-            Selected = !Selected;
+            Selected = false;
+        }
+    }
+    void FixedUpdate()
+    {
+        if (Selected)
+        {
+            selectedScroll = name;
         }
     }
 
-    private void OnMouseDown()
+    void OnMouseDown()
     {
-        if (!Selected)
+        Selected = !Selected;
+        if (Selected)
         {
-            transform.position = enlargedPosition.transform.position;
             transform.localScale = EnlargedScale;
             scrollRenderer.sortingOrder = 2;
             selectedScroll = name;
         }
         else
         {
-            transform.position = defaultPosition;
             transform.localScale = defaultScale;
             scrollRenderer.sortingOrder = 0;
             selectedScroll = "none";
         }
-        Selected = !Selected;
+        
     }
 }

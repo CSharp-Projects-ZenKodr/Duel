@@ -2,73 +2,69 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Applied to Tiles
+
 public class tileSpriteChanger : MonoBehaviour
 {
+    //Attributes
     public Sprite tileNormal;
     public Sprite tileSelected;
-    public Sprite tileHideSymbol;
-
-    private SpriteRenderer renderer; //Look at Start function
-    private bool isHidden;
-    public bool IsSelected { get; set; }
-
+    private SpriteRenderer renderer;
     public static string selectedTile;
 
-    // Start is called before the first frame update
+    //Properties
+    public bool IsSelected { get; set; }
+
+    //Functions
     void Start()
     {
-        IsSelected = isHidden = false;
         renderer = GetComponent<SpriteRenderer>();
         renderer.sprite = tileNormal;
-        selectedTile = "None";
+        selectedTile = "none";
+        IsSelected = false;
     }
-
-    // Update is called once per frame
     void Update()
+    {
+        if (IsSelected && selectedTile != name) { OnMouseDown(); }
+        if (GetComponent<BoxCollider2D>().enabled == false)
+        {
+            renderer.sprite = tileSelected;
+            GetComponent<tileSpriteChanger>().enabled = false; //Once object is inside the scroll, disable this script. 
+        }
+    }
+    void FixedUpdate()
     {
         if (IsSelected && selectedTile != name)
         {
-            OnMouseDown();
-        }
-
-    }
-
-    private void OnMouseDown()
-    {
-        if (!isHidden && ScrollClick.selectedScroll == "none")
-        {
-            if (!IsSelected)
-            {
-                IsSelected = true;
-                selectedTile = name;
-                transform.GetChild(0).gameObject.SetActive(true);
-                Select();
-            }
-            else
-            {
-                IsSelected = false;
-                transform.GetChild(0).gameObject.SetActive(false);
-                DeSelect();
-            }
+            selectedTile = name;
         }
     }
-
-
-    public void HideFace()
-    {
-        renderer.sprite = tileHideSymbol;
-        isHidden = true;
-        IsSelected = false;
-    }
-    public void Select()
+    
+    private void Select()
     {
         renderer.sprite = tileSelected;
+        selectedTile = name;
         IsSelected = true;
+        if (ScrollClick.selectedScroll != "none" && GameState.tileTaken)
+        {
+            GameState.addToScroll(this.gameObject); //Static Function in the GameState script
+        }
     }
-    public void DeSelect()
+    private void DeSelect()
     {
         renderer.sprite = tileNormal;
+        selectedTile = "none";
         IsSelected = false;
     }
-
+    
+    private void OnMouseUp()
+    {
+        transform.GetChild(0).gameObject.SetActive(false);
+        DeSelect();
+    }
+    private void OnMouseDown()
+    {
+        transform.GetChild(0).gameObject.SetActive(true);
+        Select();
+    }
 }

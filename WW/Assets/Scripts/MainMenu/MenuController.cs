@@ -15,6 +15,7 @@ public class MenuController : MonoBehaviour
     public GameObject RulesPart2Sub2;
     public GameObject RulesPart2Sub3;
     public GameObject RulesPart2Sub4;
+    public AudioSource AmbientMusic;
 
     private void Start()
     {
@@ -51,6 +52,7 @@ public class MenuController : MonoBehaviour
     //Play
     public void play()
     {
+        MainMenu.SetActive(true);
         SceneManager.LoadScene(2);
     }
 
@@ -130,6 +132,7 @@ public class MenuController : MonoBehaviour
     }
     public void quitTheGame()
     {
+        AmbientMusic.Stop();
         Application.Quit();
     }
     public void cancelQuit()
