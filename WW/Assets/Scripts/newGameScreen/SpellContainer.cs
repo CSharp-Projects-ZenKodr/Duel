@@ -59,13 +59,13 @@ public class SpellContainer : MonoBehaviour
 
         if (referencePlayerList.Count < 3)
         {
-            if (tileName.Contains("earth")) { referencePlayerList.Add(Instantiate(TilePrefabs[0])); }
+            if (tileName.Contains("strength")) { referencePlayerList.Add(Instantiate(TilePrefabs[0])); }
 
-            else if (tileName.Contains("fire")) { referencePlayerList.Add(Instantiate(TilePrefabs[1])); }
+            else if (tileName.Contains("flame")) { referencePlayerList.Add(Instantiate(TilePrefabs[1])); }
 
-            else if (tileName.Contains("thunder")) { referencePlayerList.Add(Instantiate(TilePrefabs[2])); }
+            else if (tileName.Contains("spark")) { referencePlayerList.Add(Instantiate(TilePrefabs[2])); }
 
-            else if (tileName.Contains("water")) { referencePlayerList.Add(Instantiate(TilePrefabs[3])); }
+            else if (tileName.Contains("wave")) { referencePlayerList.Add(Instantiate(TilePrefabs[3])); }
     
             int i = referencePlayerList.Count - 1;
             Vector3 tileScale = new Vector3(0.4f, 0.4f);

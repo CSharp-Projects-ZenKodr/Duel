@@ -14,7 +14,6 @@ public class TilePouchFunctions : MonoBehaviour
     {
         renderer = GetComponent<SpriteRenderer>();
         unSelectedPouch = renderer.sprite;
-        
     }
 
 
