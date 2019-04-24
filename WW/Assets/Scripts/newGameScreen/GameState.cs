@@ -240,11 +240,14 @@ public class GameState : MonoBehaviour
               }
               else if (P1TilesOnScroll[j] == 2)
               {
-                temp.transform.GetChild(1).gameObject.SetActive(true);
+                    temp.transform.GetChild(0).gameObject.SetActive(true);
+                    temp.transform.GetChild(1).gameObject.SetActive(true);
               }
               else if (P1TilesOnScroll[j] == 3)
               {
-                temp.transform.GetChild(2).gameObject.SetActive(true);
+                    temp.transform.GetChild(0).gameObject.SetActive(true);
+                    temp.transform.GetChild(1).gameObject.SetActive(true);
+                    temp.transform.GetChild(2).gameObject.SetActive(true);
               }
               else
               {
@@ -265,10 +268,13 @@ public class GameState : MonoBehaviour
                 }
                 else if (P2TilesOnScroll[j] == 2)
                 {
+                    temp.transform.GetChild(0).gameObject.SetActive(true);
                     temp.transform.GetChild(1).gameObject.SetActive(true);
                 }
                 else if (P2TilesOnScroll[j] == 3)
                 {
+                    temp.transform.GetChild(0).gameObject.SetActive(true);
+                    temp.transform.GetChild(1).gameObject.SetActive(true);
                     temp.transform.GetChild(2).gameObject.SetActive(true);
                 }
                 else
