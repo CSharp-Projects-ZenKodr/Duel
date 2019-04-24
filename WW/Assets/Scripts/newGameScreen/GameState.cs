@@ -11,12 +11,19 @@ public class GameState : MonoBehaviour
     private bool turnComplete;
     public static bool tileTaken;
     public GameObject PlayerScrolls; //Access to scroll gameobjects
+    public GameObject EnemyScrolls;  //Enemy Scroll GameObject
     public GameObject TilePositions; //Access to gameObject that is the parent of all tile placement positions;
+    public GameObject PopUpTurnChange; //Pop up View Game object when the turn is changed
+
     public List<GameObject> P1Barriers; //Access to the Player's light barriers
     public List<GameObject> P2Barriers; //Access to the Enemy's light barriers
     public List<GameObject> TilePrefabs; //List of 4 elements prefabs 
     public List<GameObject> P1HandTiles;
     public List<GameObject> P2HandTiles;
+    public List<GameObject> pdsa;
+
+    protected List<int> P1TilesOnScroll = new List<int> { 0, 0, 0 };  //0th index represent scroll 0 for enemy, 1th scroll 1 and 2nd scroll 2
+    protected List<int> P2TilesOnScroll = new List<int> { 0, 0, 0 };  //0th index represent scroll 0 for enemy, 1th scroll 1 and 2nd scroll 2
     private int p1BarrierCount, p2BarrierCount; /*Barrier functionality to be added.*/
     
     
@@ -26,6 +33,7 @@ public class GameState : MonoBehaviour
         tileTaken = false;
         turnOfPlayer = 1;  
         turnComplete = false;
+        PopUpTurnChange.SetActive(false);
 
         p1BarrierCount = p2BarrierCount = 5;
         
@@ -103,6 +111,7 @@ public class GameState : MonoBehaviour
                 P1HandTiles[i].transform.position = TilePositions.transform.GetChild(i).transform.position;
                 P1HandTiles[i].SetActive(true);
             }
+            EnemyScrollSetup(playerNumber);
         }
         else if (playerNumber == 2)
         {
@@ -116,6 +125,7 @@ public class GameState : MonoBehaviour
                 P2HandTiles[i].transform.position = TilePositions.transform.GetChild(i).transform.position;
                 P2HandTiles[i].SetActive(true);
             }
+            EnemyScrollSetup(playerNumber);
         }
     }
 
@@ -123,6 +133,7 @@ public class GameState : MonoBehaviour
     {//Called by the Select function in tileSpriteChanger
         FindObjectOfType<GameState>().tileToScroll(tile);
     }
+
     void tileToScroll(GameObject tile)
     {//Called by the static function addToScroll
         int temp = System.Convert.ToInt32(ScrollClick.selectedScroll);
@@ -134,14 +145,55 @@ public class GameState : MonoBehaviour
             {
                 P1HandTiles.Remove(tile);
                 Destroy(tile);
+                // This Updates the List that keps track which scroll have how many tiles
+                // Which will help us in showing enemy flipped tile 
+                if (scrollToAddTo.gameObject.name == "0")
+                {
+                    P1TilesOnScroll[0] += 1;
+                }
+                if (scrollToAddTo.gameObject.name == "1")
+                {
+                    P1TilesOnScroll[1] += 1;
+                }
+                if (scrollToAddTo.gameObject.name == "2")
+                {
+                    P1TilesOnScroll[2] += 1;
+                }
             }
             else
             {
                 P2HandTiles.Remove(tile);
                 Destroy(tile);
+                // This Updates the List that keps track which scroll have how many tiles
+                if (scrollToAddTo.gameObject.name == "0")
+                {
+                    P2TilesOnScroll[0] += 1;
+                }
+                if (scrollToAddTo.gameObject.name == "1")
+                {
+                    P2TilesOnScroll[1] += 1;
+                }
+                if (scrollToAddTo.gameObject.name == "2")
+                {
+                    P2TilesOnScroll[2] += 1;
+                }
             }
-            turnComplete = true; //Once a tile is placed, switch players.
-        }
+            StartCoroutine(delayEnumerator(3));
+            //turnComplete = true; //Once a tile is placed, switch players.
+         }
+    }
+
+    IEnumerator delayEnumerator(float newDelayTime)
+    {
+        //waits for the seconds sent from the
+        yield return new WaitForSeconds(2);
+        PopUpTurnChange.SetActive(true);
+        //delayTime in StartCoroutine
+        yield return new WaitForSeconds(newDelayTime);
+        //do the logic which you want to occur 
+        PopUpTurnChange.SetActive(false);
+        //after the delay
+        turnComplete = true; //Once a tile is placed, switch players.
     }
 
     public void turnOver()
@@ -161,5 +213,71 @@ public class GameState : MonoBehaviour
             PlayerScrolls.transform.GetChild(i).GetComponent<SpellContainer>().switchPlayers(turnOfPlayer);
         }
         ShowTiles(turnOfPlayer);
+    }
+
+    void EnemyScrollSetup(int playerNumber)
+    {
+        EnemyScrolls.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        EnemyScrolls.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject.SetActive(false);
+        EnemyScrolls.transform.GetChild(0).gameObject.transform.GetChild(2).gameObject.SetActive(false);
+
+        EnemyScrolls.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        EnemyScrolls.transform.GetChild(1).gameObject.transform.GetChild(1).gameObject.SetActive(false);
+        EnemyScrolls.transform.GetChild(1).gameObject.transform.GetChild(2).gameObject.SetActive(false);
+
+        EnemyScrolls.transform.GetChild(2).gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        EnemyScrolls.transform.GetChild(2).gameObject.transform.GetChild(1).gameObject.SetActive(false);
+        EnemyScrolls.transform.GetChild(2).gameObject.transform.GetChild(2).gameObject.SetActive(false);
+
+        if (playerNumber == 2)
+        {
+            for (int j = 0; j < EnemyScrolls.transform.childCount; j++)
+            {
+                GameObject temp = EnemyScrolls.transform.GetChild(j).gameObject;
+              if (P1TilesOnScroll[j] == 1)
+              {
+                temp.transform.GetChild(0).gameObject.SetActive(true);
+              }
+              else if (P1TilesOnScroll[j] == 2)
+              {
+                temp.transform.GetChild(1).gameObject.SetActive(true);
+              }
+              else if (P1TilesOnScroll[j] == 3)
+              {
+                temp.transform.GetChild(2).gameObject.SetActive(true);
+              }
+              else
+              {
+                temp.transform.GetChild(0).gameObject.SetActive(false);
+                temp.transform.GetChild(1).gameObject.SetActive(false);
+                temp.transform.GetChild(2).gameObject.SetActive(false);
+              }
+            }
+        }
+        else if (playerNumber == 1)
+        {
+            for (int j = 0; j < EnemyScrolls.transform.childCount; j++)
+            {
+                GameObject temp = EnemyScrolls.transform.GetChild(j).gameObject;
+                if (P2TilesOnScroll[j] == 1)
+                {
+                    temp.transform.GetChild(0).gameObject.SetActive(true);
+                }
+                else if (P2TilesOnScroll[j] == 2)
+                {
+                    temp.transform.GetChild(1).gameObject.SetActive(true);
+                }
+                else if (P2TilesOnScroll[j] == 3)
+                {
+                    temp.transform.GetChild(2).gameObject.SetActive(true);
+                }
+                else
+                {
+                    temp.transform.GetChild(0).gameObject.SetActive(false);
+                    temp.transform.GetChild(1).gameObject.SetActive(false);
+                    temp.transform.GetChild(2).gameObject.SetActive(false);
+                }
+            }
+        }
     }
 }
