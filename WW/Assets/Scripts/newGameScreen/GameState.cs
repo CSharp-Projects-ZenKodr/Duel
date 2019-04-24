@@ -9,14 +9,21 @@ public class GameState : MonoBehaviour
     //Attributes
     private int turnOfPlayer; //turn of: P1 or P2
     private bool turnComplete;
+
+    //Just decrease the number if you want to break a Barrier of any player
+    private int P1BarriersCount; // Number of barrier P1 has
+    private int P2BarriersCount;    // Number Of Barrier P2 Has
+
     public static bool tileTaken;
     public GameObject PlayerScrolls; //Access to scroll gameobjects
     public GameObject EnemyScrolls;  //Enemy Scroll GameObject
     public GameObject TilePositions; //Access to gameObject that is the parent of all tile placement positions;
     public GameObject PopUpTurnChange; //Pop up View Game object when the turn is changed
+    public GameObject PLBarriers; // Current turn Barriers
+    public GameObject ENBarriers; // Opponent Display Barriers
 
-    public List<GameObject> P1Barriers; //Access to the Player's light barriers
-    public List<GameObject> P2Barriers; //Access to the Enemy's light barriers
+    //public List<GameObject> P1Barriers; //Access to the Player's light barriers
+    //public List<GameObject> P2Barriers; //Access to the Enemy's light barriers
     public List<GameObject> TilePrefabs; //List of 4 elements prefabs 
     public List<GameObject> P1HandTiles;
     public List<GameObject> P2HandTiles;
@@ -30,8 +37,11 @@ public class GameState : MonoBehaviour
     //Functions
     void Start()
     {
+        P1BarriersCount = 5;
+        P2BarriersCount = 5;
+
         tileTaken = false;
-        turnOfPlayer = 1;  
+        turnOfPlayer = 1;
         turnComplete = false;
         PopUpTurnChange.SetActive(false);
 
@@ -41,6 +51,8 @@ public class GameState : MonoBehaviour
         HandSetup(2);
         
         ShowTiles(turnOfPlayer);
+        BarriersSetup(turnOfPlayer);
+
     }
     void Update()
     {
@@ -126,6 +138,7 @@ public class GameState : MonoBehaviour
                 P2HandTiles[i].SetActive(true);
             }
             EnemyScrollSetup(playerNumber);
+            BarriersSetup(playerNumber);
         }
     }
 
@@ -213,6 +226,33 @@ public class GameState : MonoBehaviour
             PlayerScrolls.transform.GetChild(i).GetComponent<SpellContainer>().switchPlayers(turnOfPlayer);
         }
         ShowTiles(turnOfPlayer);
+    }
+
+    void BarriersSetup(int playerNumber)
+    {
+        if (playerNumber == 1)
+        {
+            for(int i = 0; i < P1BarriersCount; i++)
+            {
+                PLBarriers.transform.GetChild(i).gameObject.SetActive(true);
+            }
+            for (int i = 0; i < P2BarriersCount; i++)
+            {
+                ENBarriers.transform.GetChild(i).gameObject.SetActive(true);
+            }
+        }
+        if (playerNumber == 2)
+        {
+            for (int i = 0; i < P1BarriersCount; i++)
+            {
+                ENBarriers.transform.GetChild(i).gameObject.SetActive(true);
+            }
+            for (int i = 0; i < P2BarriersCount; i++)
+            {
+                PLBarriers.transform.GetChild(i).gameObject.SetActive(true);
+            }
+        }
+
     }
 
     void EnemyScrollSetup(int playerNumber)
