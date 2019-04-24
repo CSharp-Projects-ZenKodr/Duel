@@ -37,8 +37,8 @@ public class GameState : MonoBehaviour
     //Functions
     void Start()
     {
-        P1BarriersCount = 5;
-        P2BarriersCount = 5;
+        P1BarriersCount = 4;
+        P2BarriersCount = 3;
 
         tileTaken = false;
         turnOfPlayer = 1;
@@ -124,6 +124,8 @@ public class GameState : MonoBehaviour
                 P1HandTiles[i].SetActive(true);
             }
             EnemyScrollSetup(playerNumber);
+            ResetBarriers();
+            BarriersSetup(playerNumber);
         }
         else if (playerNumber == 2)
         {
@@ -138,6 +140,7 @@ public class GameState : MonoBehaviour
                 P2HandTiles[i].SetActive(true);
             }
             EnemyScrollSetup(playerNumber);
+            ResetBarriers();
             BarriersSetup(playerNumber);
         }
     }
@@ -228,6 +231,14 @@ public class GameState : MonoBehaviour
         ShowTiles(turnOfPlayer);
     }
 
+    void ResetBarriers()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            PLBarriers.transform.GetChild(i).gameObject.SetActive(false);
+            ENBarriers.transform.GetChild(i).gameObject.SetActive(false);
+        }
+    }
     void BarriersSetup(int playerNumber)
     {
         if (playerNumber == 1)
