@@ -11,27 +11,28 @@ public class GameState : MonoBehaviour
     private bool turnComplete;
 
     //Just decrease the number if you want to break a Barrier of any player
-    private int P1BarriersCount; // Number of barrier P1 has
-    private int P2BarriersCount;    // Number Of Barrier P2 Has
+
+    private int P1BarriersCount;          //Number of barrier P1 has
+    private int P2BarriersCount;          //Number Of Barrier P2 Has
 
     public static bool tileTaken;
-    public GameObject PlayerScrolls; //Access to scroll gameobjects
-    public GameObject EnemyScrolls;  //Enemy Scroll GameObject
-    public GameObject TilePositions; //Access to gameObject that is the parent of all tile placement positions;
-    public GameObject PopUpTurnChange; //Pop up View Game object when the turn is changed
-    public GameObject PLBarriers; // Current turn Barriers
-    public GameObject ENBarriers; // Opponent Display Barriers
+    public GameObject PlayerScrolls;      //Access to scroll gameobjects
+    public GameObject EnemyScrolls;       //Enemy Scroll GameObject
+    public GameObject TilePositions;      //Access to gameObject that is the parent of all tile placement positions;
+    public GameObject PopUpTurnChange;    //Pop up View Game object when the turn is changed
+    public GameObject PLBarriers;         //Current turn Barriers
+    public GameObject ENBarriers;         //Opponent Display Barriers
 
     //public List<GameObject> P1Barriers; //Access to the Player's light barriers
     //public List<GameObject> P2Barriers; //Access to the Enemy's light barriers
-    public List<GameObject> TilePrefabs; //List of 4 elements prefabs 
+    public List<GameObject> TilePrefabs;  //List of 4 elements prefabs 
     public List<GameObject> P1HandTiles;
     public List<GameObject> P2HandTiles;
     public List<GameObject> pdsa;
 
     protected List<int> P1TilesOnScroll = new List<int> { 0, 0, 0 };  //0th index represent scroll 0 for enemy, 1th scroll 1 and 2nd scroll 2
     protected List<int> P2TilesOnScroll = new List<int> { 0, 0, 0 };  //0th index represent scroll 0 for enemy, 1th scroll 1 and 2nd scroll 2
-    private int p1BarrierCount, p2BarrierCount; /*Barrier functionality to be added.*/
+    //private int p1BarrierCount, p2BarrierCount; /*Barrier functionality to be added.*/
     
     
     //Functions
@@ -45,7 +46,7 @@ public class GameState : MonoBehaviour
         turnComplete = false;
         PopUpTurnChange.SetActive(false);
 
-        p1BarrierCount = p2BarrierCount = 5;
+        //p1BarrierCount = p2BarrierCount = 5;
         
         HandSetup(1); 
         HandSetup(2);
@@ -146,7 +147,7 @@ public class GameState : MonoBehaviour
     }
 
     public static void addToScroll(GameObject tile)
-    {//Called by the Select function in tileSpriteChanger
+    {   //Called by the Select function in tileSpriteChanger
         FindObjectOfType<GameState>().tileToScroll(tile);
     }
 
@@ -154,7 +155,16 @@ public class GameState : MonoBehaviour
     {//Called by the static function addToScroll
         int temp = System.Convert.ToInt32(ScrollClick.selectedScroll);
         SpellContainer scrollToAddTo = PlayerScrolls.transform.GetChild(temp).GetComponent<SpellContainer>();
-        bool added = scrollToAddTo.addTile(turnOfPlayer, tile.name);
+
+        TileCompatibility tileComp = tile.GetComponent<TileCompatibility>();
+        bool added = false;
+        if (tileComp.IsCompatible( turnOfPlayer == 1 ? scrollToAddTo.getP1spellSymbols : scrollToAddTo.getP2SpellSymbols))
+        {
+            added = scrollToAddTo.addTile(turnOfPlayer, tile.name);
+        }
+
+        //bool added = scrollToAddTo.addTile(turnOfPlayer, tile.name);
+
         if (added)
         {
             if (turnOfPlayer == 1)
@@ -282,9 +292,10 @@ public class GameState : MonoBehaviour
 
         if (playerNumber == 2)
         {
-            for (int j = 0; j < EnemyScrolls.transform.childCount; j++)
+            for (int j = 0; j < 3; j++)
             {
-                GameObject temp = EnemyScrolls.transform.GetChild(j).gameObject;
+              GameObject temp = EnemyScrolls.transform.GetChild(j).gameObject;
+                Debug.Log(P1TilesOnScroll[j]);
               if (P1TilesOnScroll[j] == 1)
               {
                 temp.transform.GetChild(0).gameObject.SetActive(true);
