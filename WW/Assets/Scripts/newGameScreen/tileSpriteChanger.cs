@@ -47,6 +47,7 @@ public class tileSpriteChanger : MonoBehaviour
         IsSelected = true;
         if (ScrollClick.selectedScroll != "none" && GameState.tileTaken)
         {
+
             GameState.addToScroll(this.gameObject); //Static Function in the GameState script
         }
     }

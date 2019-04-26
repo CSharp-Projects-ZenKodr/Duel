@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 8567915779224159353}
   - component: {fileID: 8870972714371385392}
   - component: {fileID: 1574929819214729938}
+  - component: {fileID: 2371059161977771813}
   m_Layer: 0
-  m_Name: water
+  m_Name: wave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 22af9c2563b3b594b9b2ec0e87d6a53f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -165,6 +166,18 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &2371059161977771813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5499247017551872283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 176d343679f344a45b4ca84f79deeccf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2217757461398586080
 PrefabInstance:
   m_ObjectHideFlags: 0
