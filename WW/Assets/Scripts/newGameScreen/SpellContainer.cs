@@ -19,6 +19,7 @@ public class SpellContainer : MonoBehaviour
         P1spellSymbols = new List<GameObject>();
         P2spellSymbols = new List<GameObject>();
     }
+
     public bool switchPlayers(int playerNumber)
     { //Called from gameState.turnOver()
         return switchSpellView(playerNumber);
