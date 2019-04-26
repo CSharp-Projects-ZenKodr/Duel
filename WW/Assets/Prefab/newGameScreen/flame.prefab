@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 248611819425027389}
   - component: {fileID: 1055121191098181646}
   - component: {fileID: 4138876133911125735}
+  - component: {fileID: 6385847483699754750}
   m_Layer: 0
-  m_Name: fire
+  m_Name: flame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: f78f60830280c6a40bec94b9e73f1f30, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -122,6 +123,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.281825, y: 4.0716276}
   m_EdgeRadius: 0
+--- !u!114 &6385847483699754750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8760399493337962445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 176d343679f344a45b4ca84f79deeccf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3806792563865700646
 PrefabInstance:
   m_ObjectHideFlags: 0
