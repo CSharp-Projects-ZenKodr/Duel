@@ -12,7 +12,7 @@ public class SpellContainer : MonoBehaviour
     public List<GameObject> TilePrefabs; //List of the 4 elements
     private List<GameObject> P1spellSymbols;
     private List<GameObject> P2spellSymbols;
- 
+
     //Functions
     void Start()
     {
@@ -53,6 +53,22 @@ public class SpellContainer : MonoBehaviour
         return false;
     }
 
+    public List<GameObject> getP1spellSymbols
+    {
+        get
+        {
+            return P1spellSymbols;
+        }
+    }
+
+    public List<GameObject> getP2SpellSymbols
+    {
+        get
+        {
+            return P2spellSymbols;
+        }
+    }
+
     public bool addTile(int playerNumber, string tileName)
     {//Called in GameState by tileToScroll
         List<GameObject> referencePlayerList = (playerNumber == 1) ? P1spellSymbols : P2spellSymbols;
@@ -80,4 +96,5 @@ public class SpellContainer : MonoBehaviour
         }
         return false;
     }   
+
 }
