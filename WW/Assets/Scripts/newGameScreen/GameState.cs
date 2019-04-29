@@ -10,8 +10,6 @@ public class GameState : MonoBehaviour
     private int turnOfPlayer; //turn of: P1 or P2
     private bool turnComplete;
 
-    //Just decrease the number if you want to break a Barrier of any player
-
     private int P1BarriersCount;          //Number of barrier P1 has
     private int P2BarriersCount;          //Number Of Barrier P2 Has
 
@@ -22,9 +20,7 @@ public class GameState : MonoBehaviour
     public GameObject PopUpTurnChange;    //Pop up View Game object when the turn is changed
     public GameObject PLBarriers;         //Current turn Barriers
     public GameObject ENBarriers;         //Opponent Display Barriers
-
-    //public List<GameObject> P1Barriers; //Access to the Player's light barriers
-    //public List<GameObject> P2Barriers; //Access to the Enemy's light barriers
+    
     public List<GameObject> TilePrefabs;  //List of 4 elements prefabs 
     public List<GameObject> P1HandTiles;
     public List<GameObject> P2HandTiles;
@@ -32,8 +28,6 @@ public class GameState : MonoBehaviour
 
     protected List<int> P1TilesOnScroll = new List<int> { 0, 0, 0 };  //0th index represent scroll 0 for enemy, 1th scroll 1 and 2nd scroll 2
     protected List<int> P2TilesOnScroll = new List<int> { 0, 0, 0 };  //0th index represent scroll 0 for enemy, 1th scroll 1 and 2nd scroll 2
-    //private int p1BarrierCount, p2BarrierCount; /*Barrier functionality to be added.*/
-    
     
     //Functions
     void Start()
@@ -45,8 +39,6 @@ public class GameState : MonoBehaviour
         turnOfPlayer = 1;
         turnComplete = false;
         PopUpTurnChange.SetActive(false);
-
-        //p1BarrierCount = p2BarrierCount = 5;
         
         HandSetup(1); 
         HandSetup(2);
@@ -278,73 +270,27 @@ public class GameState : MonoBehaviour
 
     void EnemyScrollSetup(int playerNumber)
     {
-        EnemyScrolls.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.SetActive(false);
-        EnemyScrolls.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject.SetActive(false);
-        EnemyScrolls.transform.GetChild(0).gameObject.transform.GetChild(2).gameObject.SetActive(false);
-
-        EnemyScrolls.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.SetActive(false);
-        EnemyScrolls.transform.GetChild(1).gameObject.transform.GetChild(1).gameObject.SetActive(false);
-        EnemyScrolls.transform.GetChild(1).gameObject.transform.GetChild(2).gameObject.SetActive(false);
-
-        EnemyScrolls.transform.GetChild(2).gameObject.transform.GetChild(0).gameObject.SetActive(false);
-        EnemyScrolls.transform.GetChild(2).gameObject.transform.GetChild(1).gameObject.SetActive(false);
-        EnemyScrolls.transform.GetChild(2).gameObject.transform.GetChild(2).gameObject.SetActive(false);
-
-        if (playerNumber == 2)
+        for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
-            {
-              GameObject temp = EnemyScrolls.transform.GetChild(j).gameObject;
-                Debug.Log(P1TilesOnScroll[j]);
-              if (P1TilesOnScroll[j] == 1)
-              {
-                temp.transform.GetChild(0).gameObject.SetActive(true);
-              }
-              else if (P1TilesOnScroll[j] == 2)
-              {
-                    temp.transform.GetChild(0).gameObject.SetActive(true);
-                    temp.transform.GetChild(1).gameObject.SetActive(true);
-              }
-              else if (P1TilesOnScroll[j] == 3)
-              {
-                    temp.transform.GetChild(0).gameObject.SetActive(true);
-                    temp.transform.GetChild(1).gameObject.SetActive(true);
-                    temp.transform.GetChild(2).gameObject.SetActive(true);
-              }
-              else
-              {
-                temp.transform.GetChild(0).gameObject.SetActive(false);
-                temp.transform.GetChild(1).gameObject.SetActive(false);
-                temp.transform.GetChild(2).gameObject.SetActive(false);
-              }
-            }
+                EnemyScrolls.transform.GetChild(i).GetChild(j).gameObject.SetActive(false);
         }
-        else if (playerNumber == 1)
+
+        List<int> referenceList = (playerNumber == 1 ? P2TilesOnScroll : P1TilesOnScroll);
+
+        for (int j = 0; j < 3; j++)
         {
-            for (int j = 0; j < EnemyScrolls.transform.childCount; j++)
+            GameObject temp = EnemyScrolls.transform.GetChild(j).gameObject;
+
+            if (referenceList[j] == 0)
             {
-                GameObject temp = EnemyScrolls.transform.GetChild(j).gameObject;
-                if (P2TilesOnScroll[j] == 1)
-                {
-                    temp.transform.GetChild(0).gameObject.SetActive(true);
-                }
-                else if (P2TilesOnScroll[j] == 2)
-                {
-                    temp.transform.GetChild(0).gameObject.SetActive(true);
-                    temp.transform.GetChild(1).gameObject.SetActive(true);
-                }
-                else if (P2TilesOnScroll[j] == 3)
-                {
-                    temp.transform.GetChild(0).gameObject.SetActive(true);
-                    temp.transform.GetChild(1).gameObject.SetActive(true);
-                    temp.transform.GetChild(2).gameObject.SetActive(true);
-                }
-                else
-                {
-                    temp.transform.GetChild(0).gameObject.SetActive(false);
-                    temp.transform.GetChild(1).gameObject.SetActive(false);
-                    temp.transform.GetChild(2).gameObject.SetActive(false);
-                }
+                for (int i = 0; i < 3; i++)
+                    temp.transform.GetChild(i).gameObject.SetActive(false);
+            }
+            else
+            {
+                for (int i = 0; i < referenceList[j]; i++)
+                    temp.transform.GetChild(i).gameObject.SetActive(true);
             }
         }
     }
