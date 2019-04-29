@@ -38,8 +38,8 @@ public class GameState : MonoBehaviour
     //Functions
     void Start()
     {
-        P1BarriersCount = 4;
-        P2BarriersCount = 3;
+        P1BarriersCount = 5;
+        P2BarriersCount = 5;
 
         tileTaken = false;
         turnOfPlayer = 1;
