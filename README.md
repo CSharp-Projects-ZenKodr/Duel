@@ -1,6 +1,6 @@
-# WizardWar
-	Repository for Unity project of the game Wizard War.
-	
+# Duel
+	Repository for Unity project of the game Duel.
+	Previously known as Wizard War 
 	Development Started: February 27th 2019
 
 ## Memebers 
