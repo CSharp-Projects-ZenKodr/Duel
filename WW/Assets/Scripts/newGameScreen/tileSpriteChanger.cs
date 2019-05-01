@@ -60,7 +60,7 @@ public class tileSpriteChanger : MonoBehaviour
     
     private void OnMouseUp()
     {
-        if (!Controller.paused)
+        if (!Controller.GamePaused && !Controller.TurnChanging && !Controller.GameOver)
         {
             transform.GetChild(0).gameObject.SetActive(false);
             DeSelect();
@@ -69,7 +69,7 @@ public class tileSpriteChanger : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if (!Controller.paused)
+        if (!Controller.GamePaused && !Controller.TurnChanging && !Controller.GameOver)
         {
             transform.GetChild(0).gameObject.SetActive(true);
             Select();

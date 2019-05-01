@@ -7,13 +7,14 @@ public class GameState : MonoBehaviour
 {
 
     //Attributes
-    private int turnOfPlayer; //turn of: P1 or P2
+    private static int turnOfPlayer; //turn of: P1 or P2
     private bool turnComplete;
 
     private int P1BarriersCount;          //Number of barrier P1 has
     private int P2BarriersCount;          //Number Of Barrier P2 Has
 
     public static bool tileTaken;
+    public static bool tileAdded;
     public GameObject PlayerScrolls;      //Access to scroll gameobjects
     public GameObject EnemyScrolls;       //Enemy Scroll GameObject
     public GameObject TilePositions;      //Access to gameObject that is the parent of all tile placement positions;
@@ -36,6 +37,7 @@ public class GameState : MonoBehaviour
         P2BarriersCount = 5;
 
         tileTaken = false;
+        tileAdded = false;
         turnOfPlayer = 1;
         turnComplete = false;
         PopUpTurnChange.SetActive(false);
@@ -150,12 +152,10 @@ public class GameState : MonoBehaviour
 
         TileCompatibility tileComp = tile.GetComponent<TileCompatibility>();
         bool added = false;
-        if (tileComp.IsCompatible( turnOfPlayer == 1 ? scrollToAddTo.getP1spellSymbols : scrollToAddTo.getP2SpellSymbols))
+        if (tileComp.IsCompatible(turnOfPlayer == 1 ? scrollToAddTo.getP1spellSymbols : scrollToAddTo.getP2SpellSymbols))
         {
             added = scrollToAddTo.addTile(turnOfPlayer, tile.name);
         }
-
-        //bool added = scrollToAddTo.addTile(turnOfPlayer, tile.name);
 
         if (added)
         {
@@ -196,21 +196,17 @@ public class GameState : MonoBehaviour
                     P2TilesOnScroll[2] += 1;
                 }
             }
-            StartCoroutine(delayEnumerator(3));
-            //turnComplete = true; //Once a tile is placed, switch players.
-         }
+            ScrollClick.selectedScroll = "none";
+            tileAdded = true;
+            StartCoroutine(delayEnumerator());
+        }
     }
 
-    IEnumerator delayEnumerator(float newDelayTime)
+    IEnumerator delayEnumerator()
     {
-        //waits for the seconds sent from the
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.7f);
         PopUpTurnChange.SetActive(true);
-        //delayTime in StartCoroutine
-        yield return new WaitForSeconds(newDelayTime);
-        //do the logic which you want to occur 
-        PopUpTurnChange.SetActive(false);
-        //after the delay
+        StartCoroutine(PopUpTurnChange.GetComponent<EditText>().countDown());
         turnComplete = true; //Once a tile is placed, switch players.
     }
 
@@ -219,12 +215,18 @@ public class GameState : MonoBehaviour
 
         //reset values: 
         tileTaken = false;
+        tileAdded = false;
         turnComplete = false;
         ScrollClick.selectedScroll = "none";
         tileSpriteChanger.selectedTile = "none";
 
         //Set turn to the other Player
         turnOfPlayer = (turnOfPlayer == 1) ? 2 : 1;
+
+        if (turnOfPlayer == 1 && P1HandTiles.Count == 4 || turnOfPlayer == 2 && P2HandTiles.Count == 4)
+        {//If player took a tile in the last turn but then instead of placing, attacked, they must not take a 5th tile.
+            tileTaken = true;
+        }
 
         for (int i = 0; i < PlayerScrolls.transform.childCount; i++)
         {
@@ -249,20 +251,20 @@ public class GameState : MonoBehaviour
             {
                 PLBarriers.transform.GetChild(i).gameObject.SetActive(true);
             }
-            for (int i = 0; i < P2BarriersCount; i++)
+            for (int j = 0; j < P2BarriersCount; j++)
             {
-                ENBarriers.transform.GetChild(i).gameObject.SetActive(true);
+                ENBarriers.transform.GetChild(j).gameObject.SetActive(true);
             }
         }
-        if (playerNumber == 2)
+        else if (playerNumber == 2)
         {
             for (int i = 0; i < P1BarriersCount; i++)
             {
                 ENBarriers.transform.GetChild(i).gameObject.SetActive(true);
             }
-            for (int i = 0; i < P2BarriersCount; i++)
+            for (int j = 0; j < P2BarriersCount; j++)
             {
-                PLBarriers.transform.GetChild(i).gameObject.SetActive(true);
+                PLBarriers.transform.GetChild(j).gameObject.SetActive(true);
             }
         }
 
@@ -293,5 +295,49 @@ public class GameState : MonoBehaviour
                     temp.transform.GetChild(i).gameObject.SetActive(true);
             }
         }
+    }
+
+    public static void callAttack(int scrollNumber)
+    {
+        FindObjectOfType<GameState>().Attack(scrollNumber);
+    }
+
+    public void Attack(int scrollNumber)
+    { //Called by GameState.callAttack
+
+        if (turnOfPlayer == 1)
+        {
+            P2BarriersCount -= 1;
+            P1TilesOnScroll[scrollNumber] = 0;
+        }
+        else if (turnOfPlayer == 2)
+        {
+            P1BarriersCount -= 1;
+            P2TilesOnScroll[scrollNumber] = 0;
+        }
+        ResetBarriers();
+        BarriersSetup(turnOfPlayer);
+
+
+        if (P2BarriersCount == 0)
+        {
+            Controller.Winner = "Player 1";
+            Controller.GameOver = true;
+        }
+        else if (P1BarriersCount == 0)
+        {
+            Controller.Winner = "Player 2";
+            Controller.GameOver = true;
+        }
+        if (!Controller.GameOver)
+        {
+            StartCoroutine(delayEnumerator());
+        }
+        
+    }
+
+    public static int getPlayerturn()
+    {
+        return turnOfPlayer;
     }
 }

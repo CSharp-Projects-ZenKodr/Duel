@@ -16,32 +16,38 @@ public class ElementAnimator : MonoBehaviour
     void Start()
     {
         flickered = false;
-        StartCoroutine(Flicker());
+        
     }
 
     void FixedUpdate()
     {
-        
+        if (!flickered)
+        {
+            StartCoroutine(Flicker());
+        }
     }
 
     IEnumerator Flicker()
     {
-        if (!flickered)
-        {
-            yield return new WaitForSeconds(0.3f);
-            Tile.sprite = highlightedSymbol;
-            yield return new WaitForSeconds(0.1f);
-            Tile.sprite = baseImage;
-            yield return new WaitForSeconds(0.5f);
-            Tile.sprite = highlightedSymbol;
-            yield return new WaitForSeconds(0.1f);
-            Tile.sprite = baseImage;
-            yield return new WaitForSeconds(0.5f);
-            Tile.sprite = highlightedSymbol;
-            yield return new WaitForSeconds(0.4f);
-            Tile.sprite = highlightedTile;
-            flickered = true;
-        }
-           
+        flickered = true;
+        yield return new WaitForSeconds(0.3f);
+        Tile.sprite = highlightedSymbol;
+        yield return new WaitForSeconds(0.1f);
+        Tile.sprite = baseImage;
+        yield return new WaitForSeconds(0.2f);
+        Tile.sprite = highlightedSymbol;
+        yield return new WaitForSeconds(0.1f);
+        Tile.sprite = baseImage;
+        yield return new WaitForSeconds(0.2f);
+        Tile.sprite = highlightedSymbol;
+        yield return new WaitForSeconds(0.3f);
+        Tile.sprite = highlightedTile;
     }
+
+    public void ResetImage()
+    {
+        Tile.sprite = baseImage;
+        flickered = false;
+    }
+
 }

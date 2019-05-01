@@ -5,34 +5,27 @@ using UnityEngine.UI;
 
 public class EditText : MonoBehaviour
 {
-    // Start is called before the first frame update
-    [SerializeField] private Text countText;
-    [SerializeField] private float mainTimer;
+    public Text countText;
+    public int timer;
 
-    private float timer;
-    private bool canCount = true;
-    private bool doOnce = false;
+    public IEnumerator countDown()
+    { //Called by gamestate.DelayEnumerator
 
+        Controller.TurnChanging = true;
+        int timer_local = timer;
 
-    // Update is called once per frame
-    void Start()
-    {
-        timer = 3.00f;
+        for (int i = 0; i < timer_local; i++)
+        {
+            countText.text = (timer_local - i).ToString();
+            yield return new WaitForSeconds(1);
+        }
+
+        this.gameObject.SetActive(false);
+        Controller.TurnChanging = false;
     }
-    void Update()
-    {
-        if ( timer >= 0.0f && canCount )
-        {
-            timer -= Time.deltaTime;
-            countText.text = timer.ToString("F");
-        }
-        else if (timer <= 0.0f && !doOnce)
-        {
-            canCount = false;
-            doOnce = true;
-            countText.text = "0.00";
-            //timer = 3.0f;
-        }
 
+    public void setTimer(int timerDuration)
+    {
+        timer = timerDuration;
     }
 }

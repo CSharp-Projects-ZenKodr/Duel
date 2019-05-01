@@ -10,7 +10,7 @@ public class ScrollClick : MonoBehaviour
     private Vector3 EnlargedScale;
     public static string selectedScroll; //name of the scroll (out of all the scrolls) that is selected.
     private SpriteRenderer scrollRenderer;
-    
+
     //Functions
     void Start()
     {
@@ -39,9 +39,9 @@ public class ScrollClick : MonoBehaviour
         }
     }
 
-    void OnMouseDown()
+    public void OnMouseDown()
     {
-        if (!Controller.paused)
+        if (!Controller.GamePaused && !Controller.TurnChanging && !Controller.GameOver && !GameState.tileAdded)
         {
             Selected = !Selected;
             if (Selected)

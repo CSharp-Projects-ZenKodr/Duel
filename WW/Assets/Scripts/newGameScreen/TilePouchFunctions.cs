@@ -16,10 +16,9 @@ public class TilePouchFunctions : MonoBehaviour
         unSelectedPouch = renderer.sprite;
     }
 
-
     private void OnMouseDown()
     {
-        if (!Controller.paused)
+        if (!Controller.GamePaused && !Controller.TurnChanging && !Controller.GameOver)
         {
             stateObject.addTile();
             renderer.sprite = selectedPouch;
@@ -28,10 +27,9 @@ public class TilePouchFunctions : MonoBehaviour
     }
     private void OnMouseUp()
     {
-        if (!Controller.paused)
+        if (!Controller.GamePaused && !Controller.TurnChanging && !Controller.GameOver)
         {
             renderer.sprite = unSelectedPouch;
         }
-        
     }
 }

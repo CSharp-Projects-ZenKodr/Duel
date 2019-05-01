@@ -9,35 +9,37 @@ using UnityEngine.SceneManagement;
 public class Controller : MonoBehaviour
 {
     //Attributes
-    public GameObject Rules;
-    public GameObject RulesPart2;
-    public GameObject RulesPart2Sub1;
-    public GameObject RulesPart2Sub2;
-    public GameObject RulesPart2Sub3;
-    public GameObject RulesPart2Sub4;
-    public GameObject quitDialogue;
+    
     public GameObject PauseMenu;
+    public GameObject Guide;
     public GameObject Options;
-    public static bool paused;
+    public GameObject QuitDialog;
+    public GameObject GameOverDialog;
+    public GameObject TurnChangeDialog;
+    public static string Winner;
+    public static bool GamePaused;
+    public static bool TurnChanging;
+    public static bool GameOver;
+    private bool IronManIsAlive;
     private AudioSource audiosrc;
 
     //Functions
     private void Awake()
     {
         Time.timeScale = 1f; //default timescale = 1x 
+        IronManIsAlive = true;
     }
     void Start()
     {
-        quitDialogue.SetActive(false);
+        TurnChangeDialog.SetActive(false);
+        QuitDialog.SetActive(false);
         PauseMenu.SetActive(false);
         Options.SetActive(false);
-        Rules.SetActive(false);
-        RulesPart2.SetActive(false);
-        RulesPart2Sub1.SetActive(false);
-        RulesPart2Sub2.SetActive(false);
-        RulesPart2Sub3.SetActive(false);
-        RulesPart2Sub4.SetActive(false);
-        paused = false;
+        Guide.SetActive(false);
+        GamePaused = false;
+        TurnChanging = false;
+        GameOver = false;
+        Winner = "None";
         audiosrc = GetComponent<AudioSource>();
 
         //disabling rotation
@@ -45,11 +47,11 @@ public class Controller : MonoBehaviour
     }
     void Update()
     {// Update is called once per frame
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !GameOver)
         {
-            if (paused)
+            if (GamePaused)
             {
-                if (quitDialogue.activeSelf)
+                if (QuitDialog.activeSelf)
                 {
                     CancelQuit();
                 }
@@ -58,6 +60,10 @@ public class Controller : MonoBehaviour
                     Options.SetActive(false);
                     PauseMenu.SetActive(true);
                 }
+                else if (Guide.activeSelf)
+                {
+                    GuideBackToPauseMenu();
+                }
                 else
                 {
                     Resume();
@@ -65,20 +71,32 @@ public class Controller : MonoBehaviour
             }
             else { Pause(); }
         }
+        if (GameOver && !GameOverDialog.activeSelf)
+        {
+            Endgame();
+        }
     }
 
     public void Pause()
     {
         PauseMenu.SetActive(true);
+        if (TurnChangeDialog.activeSelf)
+        {
+            TurnChangeDialog.SetActive(false);
+        }
         Time.timeScale = 0f; //stop time
-        paused = true;
+        GamePaused = true;
     }
 
     public void Resume()
     {
         PauseMenu.SetActive(false);
+        if (TurnChanging)
+        {
+            TurnChangeDialog.SetActive(true);
+        }
         Time.timeScale = 1f; //Back to 1x timescale
-        paused = false;
+        GamePaused = false;
     }
 
     public void PauseMenuOptions()
@@ -92,80 +110,33 @@ public class Controller : MonoBehaviour
         audiosrc.volume = vol;
     }
 
-    //Guide Needs to be fixed. Not working properly. 
+    public void TurnChangeTimer(int new_time)
+    {
+        TurnChangeDialog.GetComponent<EditText>().setTimer(new_time);
+    }
+
     public void PauseMenuGuide()
     {
-        roll();
+        Guide.SetActive(true);
+        PauseMenu.SetActive(false);
     }
 
-    public void roll()
-    {  //Toggle the 'Guide' scroll
-        PauseMenu.SetActive(!PauseMenu.activeSelf);
-        Rules.SetActive(!Rules.activeSelf);
-    }
-
-    public void rolldown()
+    public void GuideBackToPauseMenu()
     {
-        //It will take you scroll screen 2
-        Rules.SetActive(!Rules.activeSelf);
-        RulesPart2.SetActive(!RulesPart2.activeSelf);
-    }
-
-    public void fireOptionClicked()
-    {
-        RulesPart2.SetActive(!RulesPart2.activeSelf);
-        RulesPart2Sub1.SetActive(!RulesPart2Sub1.activeSelf);
-    }
-
-    public void boltOptionClicked()
-    {
-        RulesPart2.SetActive(!RulesPart2.activeSelf);
-        RulesPart2Sub2.SetActive(!RulesPart2Sub2.activeSelf);
-    }
-
-    public void waterOptionClicked()
-    {
-        RulesPart2.SetActive(!RulesPart2.activeSelf);
-        RulesPart2Sub3.SetActive(!RulesPart2Sub3.activeSelf);
-    }
-
-    public void earthOptionClicked()
-    {
-        RulesPart2.SetActive(!RulesPart2.activeSelf);
-        RulesPart2Sub4.SetActive(!RulesPart2Sub4.activeSelf);
-    }
-
-    public void backToSub()
-    {
-        if (RulesPart2Sub1.activeSelf == true)
-        {
-            RulesPart2Sub1.SetActive(false);
-        }
-        else if (RulesPart2Sub2.activeSelf == true)
-        {
-            RulesPart2Sub2.SetActive(false);
-        }
-        else if (RulesPart2Sub3.activeSelf == true)
-        {
-            RulesPart2Sub3.SetActive(false);
-        }
-        else if (RulesPart2Sub4.activeSelf == true)
-        {
-            RulesPart2Sub4.SetActive(false);
-        }
-        RulesPart2.SetActive(!RulesPart2.activeSelf);
-
+        Guide.GetComponent<GuideController>().ResetPage();
+        Guide.SetActive(false);
+        PauseMenu.SetActive(true);
     }
 
     public void PauseMenuQuit()
     {
         PauseMenu.SetActive(false);
-        quitDialogue.SetActive(true);
+        QuitDialog.SetActive(true);
     }
 
     public void CancelQuit()
     {
-        quitDialogue.SetActive(false);
+        QuitDialog.SetActive(false);
         PauseMenu.SetActive(true);
     }
 
@@ -174,5 +145,24 @@ public class Controller : MonoBehaviour
         audiosrc.Stop();
         SceneManager.LoadScene(1);
     }
-    
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("gameScreen");
+    }
+
+    public void Endgame()
+    {
+        GameOverDialog.SetActive(true);
+
+        TurnChangeDialog.SetActive(false);
+        QuitDialog.SetActive(false);
+        PauseMenu.SetActive(false);
+        Options.SetActive(false);
+        Guide.SetActive(false);
+        GamePaused = false;
+        TurnChanging = false;
+
+        IronManIsAlive = false;
+    }
 }
