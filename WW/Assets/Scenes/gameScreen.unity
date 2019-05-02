@@ -5679,11 +5679,11 @@ RectTransform:
   m_Father: {fileID: 2098324450}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 293, y: -836.6}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -167, y: 108.400024}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0}
 --- !u!114 &1225621620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9684,7 +9684,6 @@ MonoBehaviour:
   GameOverDialog: {fileID: 1833852736}
   TurnChangeDialog: {fileID: 2097243887}
   PlayerInfo: {fileID: 1225621620}
-  Won: {fileID: 8300000, guid: 7d9403892bf14a641897e1b22fb368fe, type: 3}
 --- !u!82 &1798470188
 AudioSource:
   m_ObjectHideFlags: 0
