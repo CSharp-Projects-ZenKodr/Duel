@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 //Applied to GameController object. 
 //Controlls Quiting, and will control pausing.
@@ -16,6 +17,7 @@ public class Controller : MonoBehaviour
     public GameObject QuitDialog;
     public GameObject GameOverDialog;
     public GameObject TurnChangeDialog;
+    public Text PlayerInfo;
     public static string Winner;
     public static bool GamePaused;
     public static bool TurnChanging;
@@ -47,6 +49,10 @@ public class Controller : MonoBehaviour
     }
     void Update()
     {// Update is called once per frame
+        if (TurnChanging)
+        {
+            PlayerInfoSet();
+        }
         if (Input.GetKeyDown(KeyCode.Escape) && !GameOver)
         {
             if (GamePaused)
@@ -75,6 +81,12 @@ public class Controller : MonoBehaviour
         {
             Endgame();
         }
+    }
+
+    void PlayerInfoSet()
+    {
+        string turn = GameState.getPlayerturn().ToString();
+        PlayerInfo.text = "Player " + turn;
     }
 
     public void Pause()
@@ -154,6 +166,7 @@ public class Controller : MonoBehaviour
     public void Endgame()
     {
         GameOverDialog.SetActive(true);
+        GameOverDialog.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = Winner + " won";
 
         TurnChangeDialog.SetActive(false);
         QuitDialog.SetActive(false);

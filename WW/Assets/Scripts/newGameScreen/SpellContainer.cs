@@ -16,7 +16,7 @@ public class SpellContainer : MonoBehaviour
     public Sprite ReadyScroll;
     private Sprite DefaultScroll;
     private SpriteRenderer renderer;
-    private bool Attacked;
+    public static bool Attacked;
 
     //Functions
     void Start()
@@ -136,7 +136,6 @@ public class SpellContainer : MonoBehaviour
             int turnOfPlayer = GameState.getPlayerturn();
             if (turnOfPlayer == 1 && p1Ready || turnOfPlayer == 2 && p2Ready)
             {
-                
                 GetComponent<ScrollClick>().OnMouseDown();
                 CastSpell(turnOfPlayer);
             }
