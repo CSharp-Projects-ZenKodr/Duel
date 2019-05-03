@@ -289,7 +289,6 @@ MonoBehaviour:
   baseImage: {fileID: 21300000, guid: 22af9c2563b3b594b9b2ec0e87d6a53f, type: 3}
   highlightedSymbol: {fileID: 21300000, guid: e291d9c315ec8244ca4f431068463ebc, type: 3}
   highlightedTile: {fileID: 21300000, guid: 8bc4967d4eaa44d418f24315b00f2dc5, type: 3}
-  flickered: 0
 --- !u!1 &56013523
 GameObject:
   m_ObjectHideFlags: 0
@@ -5077,7 +5076,6 @@ MonoBehaviour:
   baseImage: {fileID: 21300000, guid: 9452ba89bda2d5e4bb93e4642c00c968, type: 3}
   highlightedSymbol: {fileID: 21300000, guid: f99d2949e9bd2d442b4b86fe8c4ce5af, type: 3}
   highlightedTile: {fileID: 21300000, guid: b7d2aec595fb13e44890b23812592bfe, type: 3}
-  flickered: 0
 --- !u!1 &1044304577
 GameObject:
   m_ObjectHideFlags: 0
@@ -6140,6 +6138,8 @@ MonoBehaviour:
   RulesPart2Sub3: {fileID: 55363832}
   RulesPart2Sub4: {fileID: 1040281695}
   AmbientMusic: {fileID: 292013376}
+  clickSound: {fileID: 8300000, guid: 85d3215d80955400a8f30156436cf9a8, type: 3}
+  TileClickSound: {fileID: 8300000, guid: 8b22f7ea08c724e09811dccc0ef027aa, type: 3}
 --- !u!1 &1254457217
 GameObject:
   m_ObjectHideFlags: 0
@@ -6319,7 +6319,6 @@ MonoBehaviour:
   baseImage: {fileID: 21300000, guid: f78f60830280c6a40bec94b9e73f1f30, type: 3}
   highlightedSymbol: {fileID: 21300000, guid: 9015522b6dbb4344089d95e59deb79a6, type: 3}
   highlightedTile: {fileID: 21300000, guid: 9320bc15e1134ee4fa734c7572f2d502, type: 3}
-  flickered: 0
 --- !u!1 &1413646494
 GameObject:
   m_ObjectHideFlags: 0
@@ -6990,7 +6989,6 @@ MonoBehaviour:
   baseImage: {fileID: 21300000, guid: 35ea8571340d1d74da141590cc6a2689, type: 3}
   highlightedSymbol: {fileID: 21300000, guid: 1fcaec1077fa1b340afdd068297ec725, type: 3}
   highlightedTile: {fileID: 21300000, guid: 1578eb212a9b34f47a33e31bfdd42d4d, type: 3}
-  flickered: 0
 --- !u!1 &1697125136
 GameObject:
   m_ObjectHideFlags: 0
