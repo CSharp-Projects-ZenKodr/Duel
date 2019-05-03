@@ -204,7 +204,7 @@ public class GameState : MonoBehaviour
 
     IEnumerator delayEnumerator()
     {
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.3f);
         PopUpTurnChange.SetActive(true);
         StartCoroutine(PopUpTurnChange.GetComponent<EditText>().countDown());
         turnComplete = true; //Once a tile is placed, switch players.
@@ -317,7 +317,6 @@ public class GameState : MonoBehaviour
         }
         ResetBarriers();
         BarriersSetup(turnOfPlayer);
-
 
         if (P2BarriersCount == 0)
         {
