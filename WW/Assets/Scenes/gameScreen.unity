@@ -2193,6 +2193,8 @@ MonoBehaviour:
   PopUpTurnChange: {fileID: 2097243887}
   PLBarriers: {fileID: 371882513}
   ENBarriers: {fileID: 2065828759}
+  barrierPrefab: {fileID: 4351376008698203593, guid: 20dc05a0287a0494a8f31c64c9fc24aa,
+    type: 3}
   TilePrefabs:
   - {fileID: 4055502834888317842, guid: ee4c960b4cbd340468c70b0a6ec7078e, type: 3}
   - {fileID: 8760399493337962445, guid: 5c0d0fed8e21efd4da29d2a62f9b302a, type: 3}
