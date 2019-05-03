@@ -10,6 +10,8 @@ public class ScrollClick : MonoBehaviour
     private Vector3 EnlargedScale;
     public static string selectedScroll; //name of the scroll (out of all the scrolls) that is selected.
     private SpriteRenderer scrollRenderer;
+    private AudioSource clickSound;
+
 
     //Functions
     void Start()
@@ -20,6 +22,8 @@ public class ScrollClick : MonoBehaviour
         EnlargedScale = new Vector3(0.4F, 0.4F);
         defaultScale = new Vector3(0.18280F, 0.18280F);
         scrollRenderer = GetComponent<SpriteRenderer>();
+        clickSound = GetComponent<AudioSource>();
+
     }
 
     void Update()
@@ -43,6 +47,7 @@ public class ScrollClick : MonoBehaviour
     {
         if (!Controller.GamePaused && !Controller.TurnChanging && !Controller.GameOver && !GameState.tileAdded)
         {
+            clickSound.Play();
             Selected = !Selected;
             if (Selected)
             {

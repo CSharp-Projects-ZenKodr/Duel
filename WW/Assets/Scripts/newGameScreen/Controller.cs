@@ -96,6 +96,7 @@ public class Controller : MonoBehaviour
         {
             TurnChangeDialog.SetActive(false);
         }
+        audiosrc.Pause();
         Time.timeScale = 0f; //stop time
         GamePaused = true;
     }
@@ -107,6 +108,7 @@ public class Controller : MonoBehaviour
         {
             TurnChangeDialog.SetActive(true);
         }
+        audiosrc.Play();
         Time.timeScale = 1f; //Back to 1x timescale
         GamePaused = false;
     }

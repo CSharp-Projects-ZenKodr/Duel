@@ -161,6 +161,7 @@ public class GameState : MonoBehaviour
         {
             if (turnOfPlayer == 1)
             {
+                tile.GetComponent<AudioSource>().Play();
                 P1HandTiles.Remove(tile);
                 Destroy(tile);
                 // This Updates the List that keps track which scroll have how many tiles

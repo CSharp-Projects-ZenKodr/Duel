@@ -9,17 +9,21 @@ public class TilePouchFunctions : MonoBehaviour
     public Sprite selectedPouch;
     public GameState stateObject;
     private SpriteRenderer renderer;
+    private AudioSource clickSound;
 
     void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
         unSelectedPouch = renderer.sprite;
+        clickSound = GetComponent<AudioSource>();
+
     }
 
     private void OnMouseDown()
     {
         if (!Controller.GamePaused && !Controller.TurnChanging && !Controller.GameOver)
         {
+            clickSound.Play();
             stateObject.addTile();
             renderer.sprite = selectedPouch;
         }

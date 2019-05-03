@@ -10,6 +10,7 @@ public class tileSpriteChanger : MonoBehaviour
     public Sprite tileNormal;
     public Sprite tileSelected;
     private SpriteRenderer renderer;
+    private AudioSource clickSound;
     public static string selectedTile;
 
     //Properties
@@ -18,6 +19,7 @@ public class tileSpriteChanger : MonoBehaviour
     //Functions
     void Start()
     {
+        clickSound = GetComponent<AudioSource>();
         renderer = GetComponent<SpriteRenderer>();
         renderer.sprite = tileNormal;
         selectedTile = "none";
@@ -47,7 +49,6 @@ public class tileSpriteChanger : MonoBehaviour
         IsSelected = true;
         if (ScrollClick.selectedScroll != "none" && GameState.tileTaken)
         {
-
             GameState.addToScroll(this.gameObject); //Static Function in the GameState script
         }
     }
@@ -69,6 +70,7 @@ public class tileSpriteChanger : MonoBehaviour
     }
     private void OnMouseDown()
     {
+        clickSound.Play();
         if (!Controller.GamePaused && !Controller.TurnChanging && !Controller.GameOver)
         {
             transform.GetChild(0).gameObject.SetActive(true);
