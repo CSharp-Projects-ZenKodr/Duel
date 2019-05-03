@@ -21,7 +21,8 @@ public class GameState : MonoBehaviour
     public GameObject PopUpTurnChange;    //Pop up View Game object when the turn is changed
     public GameObject PLBarriers;         //Current turn Barriers
     public GameObject ENBarriers;         //Opponent Display Barriers
-    
+    public GameObject barrierPrefab;
+
     public List<GameObject> TilePrefabs;  //List of 4 elements prefabs 
     public List<GameObject> P1HandTiles;
     public List<GameObject> P2HandTiles;
@@ -317,7 +318,9 @@ public class GameState : MonoBehaviour
             P2TilesOnScroll[scrollNumber] = 0;
         }
         ResetBarriers();
+        barrierPrefab.GetComponent<AudioSource>().Play();
         BarriersSetup(turnOfPlayer);
+        
 
         if (P2BarriersCount == 0)
         {
