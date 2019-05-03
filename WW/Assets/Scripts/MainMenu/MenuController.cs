@@ -16,6 +16,8 @@ public class MenuController : MonoBehaviour
     public GameObject RulesPart2Sub3;
     public GameObject RulesPart2Sub4;
     public AudioSource AmbientMusic;
+    public AudioClip clickSound;
+    public AudioClip TileClickSound;
 
     private void Start()
     {
@@ -52,6 +54,7 @@ public class MenuController : MonoBehaviour
     //Play
     public void play()
     {
+        AmbientMusic.PlayOneShot(clickSound);
         MainMenu.SetActive(true);
         SceneManager.LoadScene(2);
     }
@@ -59,12 +62,14 @@ public class MenuController : MonoBehaviour
     //Guide
     public void roll()
     {  //Toggle the 'Guide' scroll
+        AmbientMusic.PlayOneShot(clickSound);
         MainMenu.SetActive(!MainMenu.activeSelf);
         Rules.SetActive(!Rules.activeSelf);
     }
 
     public void rolldown()
     {
+        AmbientMusic.PlayOneShot(clickSound);
         //It will take you scroll screen 2
         Rules.SetActive(!Rules.activeSelf);
         RulesPart2.SetActive(!RulesPart2.activeSelf);
@@ -72,30 +77,36 @@ public class MenuController : MonoBehaviour
 
     public void fireOptionClicked()
     {
+        AmbientMusic.PlayOneShot(TileClickSound);
         RulesPart2.SetActive(!RulesPart2.activeSelf);
         RulesPart2Sub1.SetActive(!RulesPart2Sub1.activeSelf);
     }
 
     public void boltOptionClicked()
     {
+        AmbientMusic.PlayOneShot(TileClickSound);
         RulesPart2.SetActive(!RulesPart2.activeSelf);
         RulesPart2Sub2.SetActive(!RulesPart2Sub2.activeSelf);
     }
 
     public void waterOptionClicked()
     {
+        AmbientMusic.PlayOneShot(TileClickSound);
         RulesPart2.SetActive(!RulesPart2.activeSelf);
         RulesPart2Sub3.SetActive(!RulesPart2Sub3.activeSelf);
     }
 
     public void earthOptionClicked()
     {
+        AmbientMusic.PlayOneShot(TileClickSound);
         RulesPart2.SetActive(!RulesPart2.activeSelf);
         RulesPart2Sub4.SetActive(!RulesPart2Sub4.activeSelf);
     }
 
     public void backToSub()
     {
+
+        AmbientMusic.PlayOneShot(clickSound);
         if ( RulesPart2Sub1.activeSelf == true )
         {
             RulesPart2Sub1.SetActive(false);
@@ -122,21 +133,25 @@ public class MenuController : MonoBehaviour
     {
         MainMenu.SetActive(!MainMenu.activeSelf);
         Options.SetActive(!Options.activeSelf);
+        AmbientMusic.PlayOneShot(clickSound);
     }
 
     //Quit game: 
     public void youSureBro()
     { //You sure you wanna quit, bro? Confirmation dialogue
+        AmbientMusic.PlayOneShot(clickSound);
         MainMenu.SetActive(false);
         confirmQuit.SetActive(true);
     }
     public void quitTheGame()
     {
+        AmbientMusic.PlayOneShot(clickSound);
         AmbientMusic.Stop();
         Application.Quit();
     }
     public void cancelQuit()
     {
+        AmbientMusic.PlayOneShot(clickSound);
         confirmQuit.SetActive(false);
         MainMenu.SetActive(true);
     }
