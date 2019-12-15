@@ -5,7 +5,7 @@
 	Previously known as Wizard War. 
 	Licensed Under GNU GPL3.0 
 
-	View the [apk here](https://thelab.itch.io/duel)
+View the [apk here](https://thelab.itch.io/duel)
 
 ## Current Team:
 	Muhammad Shahrom Ali
