@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.UIElements;
-
-//[RequireComponent(typeof(Button))]
+using UnityEngine.UIElements;
 
 public class ClickSound : MonoBehaviour
 {
